@@ -61,10 +61,6 @@ Console.WriteLine(orderingSystem.GetOrderStatus(order2Number));
 Console.WriteLine(orderingSystem.GetOrderStatus(order3Number));
 Console.WriteLine("\n");
 
-// Display order details
-orderingSystem.DisplayOrderDetails(order1Number);
-orderingSystem.DisplayOrderDetails(order2Number);
-
 Console.WriteLine("\n");
 // Cancel an order
 orderingSystem.CancelOrder(order1Number);
