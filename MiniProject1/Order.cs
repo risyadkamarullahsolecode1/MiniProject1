@@ -11,12 +11,14 @@ namespace MiniProject1
         //Properti
         public int OrderNumber { get; }
         public List<MenuItem> OrderedItems { get; }
+        public bool IsCanceled { get; set; }
 
 
         public Order(int orderNumber)
         {
             OrderNumber = orderNumber;
             OrderedItems = new List<MenuItem>();
+            IsCanceled = false;
         }
 
         public void AddMenuItem(MenuItem item)
@@ -26,13 +28,13 @@ namespace MiniProject1
 
         public int CalculateTotal()
         {
-            int total = 0;
-            foreach (var item in OrderedItems)
-            {
-                total += item.CalculatedPrice();
-            }
-            return total;
+            return OrderedItems.Sum(item => item.CalculatedPrice());
         }
-  
+
+        public void Cancel()
+        {
+            IsCanceled = true;
+        }
+
     }
 }

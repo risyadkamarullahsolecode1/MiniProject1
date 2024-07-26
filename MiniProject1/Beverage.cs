@@ -15,30 +15,9 @@ namespace MiniProject1
             Size = size;
         }
 
-        public Beverage(string name, int price, string description) : base(name, price, description)
-        {
-        }
-
         public override int CalculatedPrice()
         {
-            int adjustedPrice = Price;
-
-            switch (Size.ToLower())
-            {
-                case "small":
-                    adjustedPrice = 0; 
-                    break;
-                case "medium":
-                    adjustedPrice = 3000; 
-                    break;
-                case "large":
-                    adjustedPrice = 4000; 
-                    break;
-                default:
-                    throw new ArgumentException("Size harusnya string berupa 'Small', 'Medium', atau 'Large'.");
-            }
-
-            return adjustedPrice;
+            return Price;
         }
     }
 }

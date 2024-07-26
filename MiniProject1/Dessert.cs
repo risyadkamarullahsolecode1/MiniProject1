@@ -18,7 +18,8 @@ namespace MiniProject1
 
         public override int CalculatedPrice()
         {
-            int adjustedPrice = Price;
+            return Price;
+            /**int adjustedPrice = Price;
 
             switch (SugarLevel.ToLower())
             {
@@ -35,7 +36,7 @@ namespace MiniProject1
                     throw new ArgumentException("Sugar harusnya diisi string berupa 'Low', 'Medium', atau 'High'.");
             }
 
-            return adjustedPrice;
+            return adjustedPrice;**/
         }
     }
 }

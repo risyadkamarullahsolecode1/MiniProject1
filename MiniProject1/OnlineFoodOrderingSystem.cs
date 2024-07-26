@@ -31,7 +31,7 @@ namespace MiniProject1
         public int PlaceOrder(string restaurantName, List<MenuItem> orderedItems)
         {
             var restaurant = restaurants.Find(r => r.Name == restaurantName);
-            if (restaurant == null) throw new Exception("Restaurant not found.");
+            if (restaurant == null) throw new Exception("Restaurant tidak ada.");
 
             var order = new Order(nextOrderNumber);
             foreach (var item in orderedItems)
@@ -43,31 +43,53 @@ namespace MiniProject1
             nextOrderNumber++;
             return order.OrderNumber;
         }
-
+        // Display Order
         public void DisplayOrderDetails(int orderNumber)
         {
-            if (!orders.ContainsKey(orderNumber)) throw new Exception("Order not found.");
+            if (!orders.ContainsKey(orderNumber))
+            {
+                throw new Exception("Order tidak ditemukan");
+            }
 
             var order = orders[orderNumber];
             Console.WriteLine($"Order Number: {order.OrderNumber}");
             Console.WriteLine("Ordered Items:");
             foreach (var item in order.OrderedItems)
             {
-                Console.WriteLine($"- {item.Name}: {item.Price:C} ({item.Description})");
+                Console.WriteLine($"- {item.Name}: {item.Price} ({item.Description})");
             }
-            Console.WriteLine($"Total: {order.CalculateTotal():C}");
+            Console.WriteLine($"Total: {order.CalculateTotal()}");
         }
 
         public void CancelOrder(int orderNumber)
         {
-            if (!orders.ContainsKey(orderNumber)) throw new Exception("Order not found.");
-            orders.Remove(orderNumber);
+            if (!orders.ContainsKey(orderNumber))
+            {
+                throw new Exception("Order tidak ditemukan");
+            }
+
+            var order = orders[orderNumber];
+            order.Cancel();
+            Console.WriteLine($"Order Number {orderNumber} telah di cancel.");
         }
 
         public string GetOrderStatus(int orderNumber)
         {
-            if (!orders.ContainsKey(orderNumber)) return "Order not found.";
-            return "Order is in process";
+            if (!orders.ContainsKey(orderNumber))
+            {
+                return $"Order Number {orderNumber} tidak ditemukan";
+            }
+
+            var order = orders[orderNumber];
+            if (order.IsCanceled)
+            {
+                return $"Order Number {orderNumber} telah di cancel.";
+            }
+            else
+            {
+                return $"Order Number {orderNumber} di proses.";
+            }
+
         }
 
     }
